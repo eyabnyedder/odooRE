@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+
+        <!-- kanban view -->
+        <record id="patient_kanban" model="ir.ui.view">
+            <field name="name">hospital.patient.kanban</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="doctor_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div t-attf-class="#{!selection_mode ? 'text-center' : ''}">
+                                    <i class="fa fa-user" role="img" title="patient"></i>
+                                    <br/>
+                                    <strong>
+                                        <field name="capitalized_name"/>
+                                    </strong>
+                                </div>
+                                <field name="image" widget="image" class="oe_avatar"/>
+                                <hr class="mt4 mb4"/>
+                                <div class="row" t-if="!selection_mode">
+                                    <div class="col-6 text-center">
+                                        <span t-esc="record.name.value"/>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <span t-esc="record.age.value"/>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <span t-esc="record.gender.value"/>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <span t-esc="record.doctor_id.value"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- tree view -->
+        <record id="patient_tree" model="ir.ui.view">
+            <field name="name">hospital.patient.tree</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ref"/>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="patient_form" model="ir.ui.view">
+            <field name="name">hospital.patient.form</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="create_invoice" string="Create Invoice" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ref" readonly="1"/>
+                            </h1>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="is_child"/>
+                                <field name="gender"/>
+                                <field name="partner_id" option="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="doctor_id" option="{'no_open': True, 'no_create': True}"/>
+                                <field name="title" option="{'no_open': True, 'no_create': True}"/>
+                                <field name="note"/>
+                                <field name="capitalized_name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" option="{'post_refresh':'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- search view -->
+        <record id="patient_search" model="ir.ui.view">
+            <field name="name">hospital.patient.search</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" filter_domain="['|',('name', 'ilike', self), ('ref', 'ilike', self)]"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                    <separator/>
+                    <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+                    <separator/>
+                    <filter name="filter_child" string="Child" domain="[('is_child', '=', True)]"/>
+                    <separator/>
+                    <filter name="filter_adult" string="Adult" domain="[('is_child', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

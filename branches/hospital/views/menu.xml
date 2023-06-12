@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="doctor_action" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="invoice_action" model="ir.actions.act_window">
+        <field name="name">Invoicing</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem id="hospital_root_menu" name="Hospital"/>
+    <menuitem id="menu_operations_root" parent="hospital_root_menu" name="Operations" sequence="1"/>
+    <menuitem id="menu_patients" parent="menu_operations_root" name="Patients" action="patient_action"/>
+    <menuitem id="menu_master_root" parent="hospital_root_menu" name="Master Data" sequence="2"/>
+    <menuitem id="menu_doctors" parent="menu_master_root" name="Doctors" action="doctor_action"/>
+    <menuitem id="account.menu_action_move_out_invoice_type" parent="hospital_root_menu" name="Invoicing" sequence="3"/>
+</odoo>

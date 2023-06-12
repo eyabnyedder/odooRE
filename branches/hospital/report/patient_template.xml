@@ -1,0 +1,39 @@
+<odoo>
+    <template id="report_patient">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row"
+                             style="border:5px solid black; border-radius: 12px; padding-top: 150px; padding-bottom: 150px; padding-right: 180px; padding-left: 200px;">
+                            <div class="col">
+                                <div>
+                                    <h2 t-field="doc.name"/>
+                                </div>
+                                <div style="margin-top: 10px;">
+                                    <div>
+                                        <b>Gender :</b>
+                                        <p t-field="doc.gender"/>
+                                    </div>
+                                    <div>
+                                        <b>Age :</b>
+                                        <p t-field="doc.age"/>
+                                    </div>
+                                    <div>
+                                        <b>Doctor Name :</b>
+                                        <p t-field="doc.doctor_id"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" style="display:flex">
+                                <img alt="img" t-if="doc.image"
+                                     t-att-src="image_data_uri(doc.image)" style="position: absolute; left:70%; transform: translate(30%,0%);"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
