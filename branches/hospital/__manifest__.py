@@ -8,7 +8,6 @@
     'website': 'https://hospital.com',
     'depends': ['base', 'mail', 'account', 'sale'],
     'data': [
-        "security/ir.model.access.csv",
         "data/sequence.xml",
         "views/patient.xml",
         "views/doctor.xml",

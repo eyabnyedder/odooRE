@@ -6,6 +6,9 @@
     'depends': ['base', 'mail'],
     'data': [
         "security/ir.model.access.csv",
+        'views/menu.xml',
+        'views/adds.xml',
+
     ],
     'installable': True,
     'auto_install': True,

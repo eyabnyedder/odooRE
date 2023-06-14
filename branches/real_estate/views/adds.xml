@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- The part of code below represent the form to add the related model objects  -->
+
+    <record id="view_re_house_form" model="ir.ui.view">
+        <field name="name">re.estate.name.tree</field>
+        <field name="model">re.estate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="surface"/>
+                        <field name="price"/>
+                        <field name="description"/>
+                        <field name="type"/>
+                        <field name="type_estate"/>
+                        <field name="floor_nbr" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                        <field name="bedroom_nbr" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                        <field name="bathroom_nbr" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                        <field name="kitchen_nbr" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                        <field name="garden_surface" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                        <field name="garden_surface" attrs="{'invisible': [('type_estate', '!=', 'house')]}"/>
+                    </group>
+                </sheet>
+                <!-- The part of code below represents the chatter section   -->
+            </form>
+        </field>
+
+    </record>
+    <!-- The part of code below represent the tree to display the list of patients objects  -->
+
+    <record id="view_re_estate_tree" model="ir.ui.view">
+        <field name="name">re.estate.name.tree</field>
+        <field name="model">re.estate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="surface"/>
+                <field name="price"/>
+                <field name="description"/>
+                <field name="type"/>
+
+            </tree>
+        </field>
+
+    </record>
+    <!-- The part of code below create an action  -->
+
+    <record id="action_re_estate" model="ir.actions.act_window">
+        <field name="name">estate</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">re.estate</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <menuitem
+            id="re_menu_adds"
+            parent="re_menu_root"
+            name="Adds"
+            action="action_re_estate"
+            sequence="10"/>
+</odoo>
